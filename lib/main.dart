@@ -37,10 +37,9 @@ class _NavigatorState extends State<Navigator> {
     return Scaffold(
       body: SafeArea(child: children[currInd]),
       bottomNavigationBar: CurvedNavigationBar(
-        // color: Colors.,
         color: Colors.brown[100],
         buttonBackgroundColor: Colors.grey[300],
-        backgroundColor: null,
+        backgroundColor: Colors.transparent,
         animationDuration: Duration(milliseconds: 300),
         height: 50,
         items: <Widget>[

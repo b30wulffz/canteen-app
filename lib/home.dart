@@ -1,3 +1,4 @@
+import 'package:canteen_app/menu.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -8,6 +9,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    // var _screenSize = MediaQuery.of(context).size;
     return ListView(
       padding: EdgeInsets.all(25),
       children: <Widget>[
@@ -61,6 +63,7 @@ class _HomeState extends State<Home> {
                 icon: Icons.account_balance,
                 title: "Click",
                 active: true,
+                // dest: Menu(),
               ),
               IconButton(
                 icon: Icons.account_balance,
@@ -87,7 +90,14 @@ class _HomeState extends State<Home> {
         Text(
           "Food Menu",
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
-        )
+        ),
+
+        // Container(
+        //   color: Colors.red,
+        //   width: 30,
+        //   height: 500,
+        // )
+        // FoodCard(),
       ],
     );
   }
@@ -97,8 +107,9 @@ class IconButton extends StatelessWidget {
   final IconData icon;
   final String title;
   final bool active;
+  final Function dest;
 
-  IconButton({this.icon, this.title, this.active = false});
+  IconButton({this.icon, this.title, this.active = false, this.dest});
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +117,12 @@ class IconButton extends StatelessWidget {
       margin: EdgeInsets.only(right: 35),
       child: GestureDetector(
         // enableFeedback: false,
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Menu()),
+          );
+        },
         child: Column(
           children: <Widget>[
             Container(
@@ -121,18 +137,23 @@ class IconButton extends StatelessWidget {
             Text(
               title,
               style: TextStyle(fontWeight: FontWeight.bold),
-            )
+            ),
           ],
         ),
       ),
     );
-
-    // return Container(
-    //   color: Colors.orange,
-    //   child: InkWell(
-    //     onTap: () {},
-    //     child:
-    //   ),
-    // );
   }
 }
+
+// class FoodCard extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       child: Container(
+//         color: Colors.red,
+//         child: Text("hello"),
+//       ),
+//       flex: 1,
+//     );
+//   }
+// }
