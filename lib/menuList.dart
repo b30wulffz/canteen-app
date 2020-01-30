@@ -26,44 +26,34 @@ class _MenuListState extends State<MenuList> {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Row(
+        child: ListView(
           children: <Widget>[
-            Container(
-              width: 85,
-              child: ListView(
-                children: <Widget>[
-                  ListIcon(
-                      isActive: currInd == 0 ? true : false,
-                      func: switchContent,
-                      index: 0),
-                  ListIcon(
-                      isActive: currInd == 1 ? true : false,
-                      func: switchContent,
-                      index: 1),
-                  ListIcon(
-                      isActive: currInd == 2 ? true : false,
-                      func: switchContent,
-                      index: 2),
-                  ListIcon(
-                      isActive: currInd == 3 ? true : false,
-                      func: switchContent,
-                      index: 3),
-                  ListIcon(
-                      isActive: currInd == 4 ? true : false,
-                      func: switchContent,
-                      index: 4),
-                  ListIcon(
-                      isActive: currInd == 5 ? true : false,
-                      func: switchContent,
-                      index: 5),
-                  ListIcon(
-                      isActive: currInd == 6 ? true : false,
-                      func: switchContent,
-                      index: 6),
-                ],
-              ),
+            ListIcon(
+              image: 'assets/images/burger.png',
+              title: 'Cheese Burgers',
+              desc:
+                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Conssu.',
             ),
-            ItemDetails(),
+            ListIcon(
+              image: 'assets/images/burger.png',
+              title: 'Cheese Burgers',
+              desc:
+                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Conssu.',
+              isVeg: false,
+            ),
+            ListIcon(
+              image: 'assets/images/burger.png',
+              title: 'Cheese Burgers',
+              desc:
+                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Conssu',
+            ),
+            ListIcon(
+              image: 'assets/images/burger.png',
+              title: 'Cheese Burgers',
+              desc:
+                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Conssu.',
+              isLast: true,
+            ),
           ],
         ),
       ),
@@ -72,106 +62,106 @@ class _MenuListState extends State<MenuList> {
 }
 
 class ListIcon extends StatelessWidget {
-  final bool isActive;
-  final Function(int) func;
-  final int index;
-  ListIcon({this.isActive = false, this.func, this.index});
+  final bool isLast;
+  final String image;
+  final String title;
+  final String desc;
+  final bool isVeg;
+  ListIcon(
+      {this.image,
+      this.title,
+      this.desc = '',
+      this.isLast = false,
+      this.isVeg = true});
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        func(index);
-      },
-      child: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          // border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(20),
-          color: isActive ? Colors.grey[200] : Colors.transparent,
+    return Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                // border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(20),
+                // color: Colors.grey[200],
+              ),
+              child: Image.asset(this.image, height: 65),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    this.title,
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    this.desc,
+                    style: TextStyle(fontSize: 15, color: Colors.grey[500]),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 6),
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(),
+              child: CustomPaint(
+                painter: Circle(isVeg: this.isVeg),
+              ),
+            )
+          ],
         ),
-        child: Image.asset('assets/images/burger.png', height: 65),
-      ),
+        Divider(
+          thickness: isLast ? 0 : 2,
+        )
+      ],
     );
   }
 }
 
-class ItemDetails extends StatelessWidget {
+class Circle extends CustomPainter {
+  final bool isVeg;
+  Circle({this.isVeg = true});
+
   @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView(
-          children: <Widget>[
-            Center(
-              child: Image.asset(
-                'assets/images/burger.png',
-                height: 200,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Double Cheeseburger",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Quantity: 100g",
-                  style: TextStyle(fontSize: 15, color: Colors.grey),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    // borderRadius: BorderRadius.circular(6),
-                    color: Colors.green,
-                  ),
-                  child: Text(
-                    "Veg",
-                    style: TextStyle(fontSize: 15, color: Colors.white),
-                  ),
-                )
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 5),
-              child: Text(
-                "Rs. 150.00",
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.orange,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
-            // ConstrainedBox(
-            //   constraints: BoxConstraints(maxHeight: 105, maxWidth: 10),
-            //   child: Container(
-            //     margin: EdgeInsets.symmetric(vertical: 5),
-            //     padding: EdgeInsets.all(10),
-            //     decoration: BoxDecoration(
-            //       color: Colors.amber,
-            //       borderRadius: BorderRadius.circular(15),
-            //     ),
-            //     child: Icon(Icons.shopping_basket),
-            //   ),
-            // ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 5),
-              child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada iaculis quam, a convallis est eleifend ut. Cras urna ante, suscipit sed tincidunt eget, blandit in enim. Ut fringilla nibh at odio tempus, nec aliquam enim viverra. Cras vel luctus odio, accumsan aliquet mi. Nam eget fringilla elit, vel volutpat ipsum. Vivamus sed massa tincidunt, suscipit neque at, vulputate arcu. Quisque ac elementum massa, fermentum tempus leo. Morbi et erat et eros lacinia lobortis sed ut tortor. Duis id purus sed turpis tincidunt scelerisque. Donec eget mollis urna. Fusce condimentum, sapien nec sodales eleifend, nulla magna feugiat urna, eget bibendum orci nunc luctus velit. Fusce rhoncus sapien vitae egestas mollis.",
-                style: TextStyle(
-                  fontSize: 17,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  void paint(Canvas canvas, Size size) {
+    final Color colVal = isVeg ? Colors.green : Colors.red;
+
+    canvas.drawCircle(
+        Offset(size.width / 2, size.height / 2), 5, Paint()..color = colVal);
+    canvas.drawLine(
+        Offset(0, 0),
+        Offset(0, size.height),
+        Paint()
+          ..strokeWidth = 2
+          ..color = colVal);
+    canvas.drawLine(
+        Offset(0, 0),
+        Offset(size.width, 0),
+        Paint()
+          ..strokeWidth = 2
+          ..color = colVal);
+    canvas.drawLine(
+        Offset(size.width, 0),
+        Offset(size.width, size.height),
+        Paint()
+          ..strokeWidth = 2
+          ..color = colVal);
+    canvas.drawLine(
+        Offset(size.width, size.height),
+        Offset(0, size.height),
+        Paint()
+          ..strokeWidth = 2
+          ..color = colVal);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }

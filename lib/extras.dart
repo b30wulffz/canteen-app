@@ -1,4 +1,4 @@
-import 'package:canteen_app/menuList.dart';
+import 'package:canteen_app/extrasList.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatefulWidget {
@@ -24,24 +24,45 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              margin: EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  BackButton(),
-                  Text(
-                    "Sunday",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  margin: EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      BackButton(),
+                      Text(
+                        "Sunday",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                TopBar(switchPage, currInd),
+                children[currInd]
+              ],
             ),
-            TopBar(switchPage, currInd),
-            children[currInd]
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius:
+                        BorderRadius.only(topLeft: Radius.circular(20))),
+                width: 80,
+                height: 80,
+                child: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.white,
+                ),
+              ),
+            )
           ],
         ),
       ),
