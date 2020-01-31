@@ -123,16 +123,25 @@ class ItemDetails extends StatelessWidget {
                   "Quantity: 100g",
                   style: TextStyle(fontSize: 15, color: Colors.grey),
                 ),
+                // Container(
+                //   margin: EdgeInsets.symmetric(vertical: 5),
+                //   padding: EdgeInsets.all(5),
+                //   decoration: BoxDecoration(
+                //     // borderRadius: BorderRadius.circular(6),
+                //     color: Colors.green,
+                //   ),
+                //   child: Text(
+                //     "Veg",
+                //     style: TextStyle(fontSize: 15, color: Colors.white),
+                //   ),
+                // )
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    // borderRadius: BorderRadius.circular(6),
-                    color: Colors.green,
-                  ),
-                  child: Text(
-                    "Veg",
-                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  margin: EdgeInsets.symmetric(horizontal: 6),
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(),
+                  child: CustomPaint(
+                    painter: Circle(isVeg: true),
                   ),
                 )
               ],
@@ -173,5 +182,47 @@ class ItemDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class Circle extends CustomPainter {
+  final bool isVeg;
+  Circle({this.isVeg = true});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Color colVal = isVeg ? Colors.green : Colors.red;
+
+    canvas.drawCircle(
+        Offset(size.width / 2, size.height / 2), 5, Paint()..color = colVal);
+    canvas.drawLine(
+        Offset(0, 0),
+        Offset(0, size.height),
+        Paint()
+          ..strokeWidth = 2
+          ..color = colVal);
+    canvas.drawLine(
+        Offset(0, 0),
+        Offset(size.width, 0),
+        Paint()
+          ..strokeWidth = 2
+          ..color = colVal);
+    canvas.drawLine(
+        Offset(size.width, 0),
+        Offset(size.width, size.height),
+        Paint()
+          ..strokeWidth = 2
+          ..color = colVal);
+    canvas.drawLine(
+        Offset(size.width, size.height),
+        Offset(0, size.height),
+        Paint()
+          ..strokeWidth = 2
+          ..color = colVal);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }

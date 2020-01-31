@@ -1,3 +1,5 @@
+import 'package:canteen_app/messFeedback.dart';
+import 'package:canteen_app/history.dart';
 import 'package:canteen_app/home.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +28,9 @@ class _NavigatorState extends State<Navigator> {
   int currInd = 2;
   final List<Widget> children = [
     Text("DEF"),
-    Text("GHI"),
+    History(),
     Home(),
-    Text("JKL"),
+    MessFeedback(),
     Text("MNO")
   ];
 
