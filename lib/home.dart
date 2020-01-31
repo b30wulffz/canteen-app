@@ -88,15 +88,40 @@ class _HomeState extends State<Home> {
           height: 40,
         ),
         Text(
-          "Food Menu",
+          "Extras",
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
         ),
-
-        // Container(
-        //   color: Colors.red,
-        //   width: 30,
-        //   height: 500,
-        // )
+        Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(),
+                    child: Stack(
+                      children: <Widget>[
+                        // Positioned(bottom: 0, right: 0,child: Cache,)
+                      ],
+                    ),
+                    color: Colors.red,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: Text("Test"),
+                    color: Colors.red,
+                  ),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[Text("hi"), Text("hi")],
+            )
+          ],
+        )
         // FoodCard(),
       ],
     );
