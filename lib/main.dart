@@ -1,15 +1,24 @@
 import 'package:canteen_app/home.dart';
+import 'package:canteen_app/models.dart';
+import 'package:canteen_app/requests.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  MenuFull menuFull = await MenuRequests.getMenus();
+  runApp(MyApp(
+    menuFull: menuFull,
+  ));
+}
 
 class MyApp extends StatelessWidget {
+  final MenuFull menuFull;
+  MyApp({this.menuFull});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Canteen App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
@@ -24,13 +33,7 @@ class Navigator extends StatefulWidget {
 
 class _NavigatorState extends State<Navigator> {
   int currInd = 2;
-  final List<Widget> children = [
-    Text("DEF"),
-    Text("GHI"),
-    Home(),
-    Text("JKL"),
-    Text("MNO")
-  ];
+  final List<Widget> children = [Text("DEF"), Text("GHI"), Home(), Text("JKL"), Text("MNO")];
 
   @override
   Widget build(BuildContext context) {
